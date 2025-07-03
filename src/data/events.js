@@ -5,12 +5,9 @@ export const categories = [
   { id: "theatre-comedy", name: "Theatre & Comedy", icon: "🎭" },
   { id: "food-drink", name: "Food & Drink", icon: "🍽️" },
   { id: "art-exhibitions", name: "Art & Exhibitions", icon: "🖼️" },
-  { id: "sports-events", name: "Sports Events", icon: "⚽" },
+  { id: "sports-outdoor", name: "Sports & Outdoor", icon: "⚽" },
   { id: "workshops-classes", name: "Workshops & Classes", icon: "🛠️" },
-  { id: "family-kids", name: "Family & Kids", icon: "👨‍👩‍👧‍👦" },
   { id: "outdoor-activities", name: "Outdoor Activities", icon: "🏞️" },
-  { id: "community-events", name: "Community Events", icon: "🤝" },
-  { id: "seasonal-events", name: "Seasonal Events", icon: "🌸" },
 ];
 
 export const todaysEvents = [
@@ -90,4 +87,8 @@ export const todaysEvents = [
 
 export function getEventsByCategory(category) {
   return todaysEvents.filter((event) => event.category === category);
+}
+
+export function getEventsByDate(dateStr) {
+  return todaysEvents.filter((event) => event.date === dateStr);
 }

@@ -4,216 +4,318 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 ---
 
 <BaseLayout title="what TO do - Today's Events">
-	<div class="container" style="padding: 2rem 1rem;">
-	<!-- Events Grouped by Category -->
-    <div class="events-container">
-      <h2 class="page-title">Today's Events ({todaysEvents.length})</h2>
-      
-      {categories.map(category => {
-        const categoryEvents = getEventsByCategory(category.id);
-        
-        if (categoryEvents.length === 0) return null;
-        
-        return (
-          <section class="category-section">
-            <h3 class="category-title">
-              <span class="category-icon">{category.icon}</span>
-              {category.name}
-              <span class="category-count">({categoryEvents.length})</span>
-            </h3>
-            
-            <div class="events-grid">
-              {categoryEvents.map(event => (
-                <div class="event-card">
-                  <h4 class="event-title">{event.title}</h4>
-                  <div class="event-meta">
-                    <div class="event-time">{event.time}</div>
-                    <div class="event-price">{event.price}</div>
-                  </div>
-                  <div class="event-location">{event.location}</div>
-                  <div class="event-address">{event.address}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-        );
-      })}
-    </div>
+	<div style="padding: 2rem 1rem;">
+		<div class="events-container">
+			<h2 class="page-title">Today's Events ({todaysEvents.length})</h2>
+			
+			<div class="categories-grid">
+				{categories.map(category => {
+					const categoryEvents = getEventsByCategory(category.id);
+					
+					return (
+						<section class="category-column">
+							<h3 class="category-title">
+								<span class="category-icon">{category.icon}</span>
+								{category.name}
+								<span class="category-count">({categoryEvents.length})</span>
+							</h3>
+							
+							<div class="events-list">
+								{categoryEvents.length > 0 ? (
+									categoryEvents.map(event => (
+										<div class="event-item">
+											<span class="event-title">{event.title}</span>
+											
+											<!-- Hover Popup -->
+											<div class="event-popup">
+												<div class="popup-content">
+													<h5 class="popup-title">{event.title}</h5>
+													<div class="popup-meta">
+														<div class="popup-time">🕐 {event.time}</div>
+														<div class="popup-price">💰 {event.price}</div>
+													</div>
+													<div class="popup-location">📍 {event.location}</div>
+													<div class="popup-address">{event.address}</div>
+												</div>
+											</div>
+										</div>
+									))
+								) : (
+									<div class="no-events-text">No events today</div>
+								)}
+							</div>
+						</section>
+					);
+				})}
+			</div>
+		</div>
 		 
-
-		 <!-- No Events Message -->
-		  <section class="no-events-cta" style="margin-top: 3rem; padding: 2rem; background: #f8fafc; border-radius: 8px; text-align: center;">
+		<!-- No Events Message -->
+		<section class="no-events-cta" style="margin-top: 3rem; padding: 2rem; background: #f8fafc; border-radius: 8px; text-align: center;">
 			<h3 style="margin-bottom: 1rem; color: #374151;">Not finding what you're looking for?</h3>
 			<p style="color: #6b7280; margin-bottom: 1.5rem;">Check out our curated list of things to do in Toronto anytime.</p>
-			<a href="/things-to-do" class="cta-butotn">Browse Things to Do</a>
-		  </section>
+			<a href="/things-to-do" class="cta-button">Browse Things to Do</a>
+		</section>
 	</div>
 
 	<style>
 		.events-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-    
-    .page-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1f2937;
-      margin-bottom: 2.5rem;
-      text-align: center;
-    }
-    
-    .category-section {
-      margin-bottom: 3rem;
-    }
-    
-    .category-title {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #1f2937;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #e5e5e5;
-    }
-    
-    .category-icon {
-      font-size: 1.25rem;
-    }
-    
-    .category-count {
-      color: #6b7280;
-      font-size: 1rem;
-      font-weight: 500;
-    }
-    
-    .events-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .event-card {
-      background: white;
-      border: 1px solid #e5e5e5;
-      border-radius: 8px;
-      padding: 1.5rem;
-      transition: all 0.2s ease;
-      height: fit-content;
-    }
-    
-    .event-card:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transform: translateY(-2px);
-    }
-    
-    .event-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #1f2937;
-      line-height: 1.3;
-      margin-bottom: 1rem;
-    }
-    
-    .event-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      gap: 1rem;
-    }
-    
-    .event-time {
-      color: #4b5563;
-      font-weight: 500;
-      font-size: 0.95rem;
-    }
-    
-    .event-price {
-      background: #dbeafe;
-      color: #1e40af;
-      padding: 0.25rem 0.75rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    
-    .event-location {
-      color: #374151;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-    
-    .event-address {
-      color: #6b7280;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-    
-    .cta-button {
-      display: inline-block;
-      background: #3b82f6;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.2s ease;
-    }
-    
-    .cta-button:hover {
-      background: #2563eb;
-    }
-    
-    /* Responsive breakpoints */
-    @media (min-width: 768px) {
-      .events-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (min-width: 1024px) {
-      .events-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .events-container {
-        padding: 0 1rem;
-      }
-      
-      .events-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      
-      .event-card {
-        padding: 1rem;
-      }
-      
-      .event-title {
-        font-size: 1rem;
-      }
-      
-      .event-meta {
-        flex-direction: column;
-        align-items: start;
-        gap: 0.5rem;
-      }
-      
-      .page-title {
-        font-size: 1.5rem;
-      }
-      
-      .category-title {
-        font-size: 1.25rem;
-      }
-    }
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 1rem;
+		}
+		
+		.page-title {
+			font-size: 2rem;
+			font-weight: 700;
+			color: #1f2937;
+			margin-bottom: 2.5rem;
+			text-align: center;
+		}
+		
+		.categories-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 1.5rem;
+			align-items: start;
+			margin-bottom: 2rem;
+		}
+		
+		.category-column {
+			background: #ffffff;
+			border: 1px solid #e5e7eb;
+			border-radius: 8px;
+			padding: 1.5rem;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+			transition: box-shadow 0.2s ease;
+		}
+		
+		.category-column:hover {
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+		}
+		
+		.category-title {
+			display: flex;
+			align-items: center;
+			gap: 0.75rem;
+			font-size: 1.25rem;
+			font-weight: 600;
+			color: #1f2937;
+			margin-bottom: 1.5rem;
+			padding-bottom: 0.75rem;
+			border-bottom: 2px solid #e5e7eb;
+		}
+		
+		.category-icon {
+			font-size: 1.25rem;
+		}
+		
+		.category-count {
+			color: #6b7280;
+			font-size: 0.9rem;
+			font-weight: 500;
+			margin-left: auto;
+		}
+		
+		.events-list {
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+		
+		.event-item {
+			position: relative;
+			display: block;
+			z-index: 1;
+		}
+		
+		.event-title {
+			color: #3b82f6;
+			cursor: pointer;
+			font-weight: 500;
+			transition: color 0.15s ease;
+			text-decoration: none;
+			border-bottom: 1px solid transparent;
+			padding: 0.5rem 0;
+			display: block;
+			border-radius: 4px;
+		}
+		
+		.event-title:hover {
+			color: #1e40af;
+			background: #f8fafc;
+			padding-left: 0.5rem;
+		}
+		
+		.no-events-text {
+			color: #9ca3af;
+			font-style: italic;
+			text-align: center;
+			padding: 2rem 0;
+			font-size: 0.9rem;
+		}
+		
+		/* Popup Styles */
+		.event-popup {
+			position: absolute;
+			bottom: calc(100% + 8px);
+			left: 50%;
+			transform: translateX(-50%);
+			background: white;
+			border: 1px solid #d1d5db;
+			border-radius: 8px;
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+			padding: 1rem;
+			min-width: 280px;
+			z-index: 1000;
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+			transition: all 0.2s ease;
+		}
+		
+		.event-item:hover .event-popup {
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+		}
+		
+		.popup-content {
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+		
+		.popup-title {
+			font-size: 1rem;
+			font-weight: 600;
+			color: #1f2937;
+			margin: 0;
+			line-height: 1.3;
+		}
+		
+		.popup-meta {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 1rem;
+		}
+		
+		.popup-time {
+			color: #4b5563;
+			font-size: 0.85rem;
+			font-weight: 500;
+		}
+		
+		.popup-price {
+			background: #dbeafe;
+			color: #1e40af;
+			padding: 0.25rem 0.5rem;
+			border-radius: 4px;
+			font-size: 0.8rem;
+			font-weight: 600;
+			white-space: nowrap;
+		}
+		
+		.popup-location {
+			color: #374151;
+			font-weight: 500;
+			font-size: 0.9rem;
+		}
+		
+		.popup-address {
+			color: #6b7280;
+			font-size: 0.8rem;
+			line-height: 1.4;
+		}
+		
+		/* Arrow for popup */
+		.event-popup::after {
+			content: '';
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 12px;
+			height: 12px;
+			background: white;
+			border: 1px solid #d1d5db;
+			border-top: none;
+			border-left: none;
+			transform: translateX(-50%) rotate(45deg);
+		}
+		
+		.cta-button {
+			display: inline-block;
+			background: #3b82f6;
+			color: white;
+			padding: 0.75rem 1.5rem;
+			border-radius: 6px;
+			text-decoration: none;
+			font-weight: 500;
+			transition: background 0.2s ease;
+		}
+		
+		.cta-button:hover {
+			background: #2563eb;
+		}
+		
+		/* Responsive breakpoints */
+		@media (max-width: 1024px) {
+			.categories-grid {
+				grid-template-columns: repeat(2, 1fr);
+				gap: 1rem;
+			}
+		}
+		
+		@media (max-width: 768px) {
+			.categories-grid {
+				grid-template-columns: 1fr;
+				gap: 1rem;
+			}
+			
+			.category-column {
+				padding: 1rem;
+			}
+			
+			.category-title {
+				font-size: 1.1rem;
+			}
+			
+			.event-title {
+				font-size: 0.9rem;
+			}
+			
+			.page-title {
+				font-size: 1.5rem;
+			}
+			
+			.event-popup {
+				min-width: 260px;
+				left: 0;
+				transform: none;
+				margin-left: 0;
+			}
+			
+			.event-popup::after {
+				left: 20px;
+				transform: rotate(45deg);
+			}
+		}
+		
+		@media (max-width: 480px) {
+			.events-container {
+				padding: 0 0.5rem;
+			}
+			
+			.category-column {
+				padding: 0.75rem;
+			}
+			
+			.page-title {
+				font-size: 1.3rem;
+				margin-bottom: 1.5rem;
+			}
+		}
 	</style>
-
 </BaseLayout>
