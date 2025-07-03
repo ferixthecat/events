@@ -1,0 +1,81 @@
+---
+export interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+const currentDate = new Date().toLocaleDateString('en-CA', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+});
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="what TO do - Find today's events in Toronto">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{title}</title>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <style>
+            /* Inline critical CSS for speed */
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body {
+                font-family: system-ui, -apple-system, sans-serif;
+                line-height: 1.5;
+                background: #fafafa;
+            }
+            .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+            .header {
+                background: #fff;
+                border-bottom: 1px solid #e5e5e5;
+                padding: 1rem 0;
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
+            .nav { display: flex; align-items: center; justify-content: space-between; }
+            .logo { font-size: 1.5rem; font-weight: bold; color: #333; text-docoration: none; }
+            .nav-links { display: flex; gap: 2rem; list-style: none; }
+            .nav-links a { color: #666; text-decoration: none; font-weight: 500; }
+            .nav-links a:hover { color: #333; }
+            .date-banner {
+                background: #f0f9ff;
+                padding: 0.75rem 0;
+                text-align: center;
+                border-bottom: 1px solid #e0f2fe;
+                font-weight: 500;
+                color: #0369a1;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <nav class="nav">
+                    <a href="/" class="logo">what TO do</a>
+                    <ul class="nav-links">
+                        <li><a href="/">Today's Events</a></li>
+                        <li><a href="/eventsmap">Event Map</a></li>
+                        <li><a href="/thingstodo">Things to Do</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="date-banner">
+            Today's date: {currentDate}
+            </div>
+        </header>
+
+        <main>
+            <slot />
+        </main>
+
+        <footer style="margin-top: 4rem; padding: 2rem 0; background: #fff; border-top: 1px solid #e5e5e5; text-align: center; color: #666;">
+            <div class="container">
+                <p>&copy; 2025 what TO do. Find what's happening in your city.</p>
+            </div>
+        </footer>
+    </body>
