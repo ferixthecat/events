@@ -1,13 +1,13 @@
 export const categories = [
-  { id: "pop-up", name: "Pop-ups", icon: "🎪" },
-  { id: "festival", name: "Festivals", icon: "🎉" },
-  { id: "live-music", name: "Live Music", icon: "🎶" },
-  { id: "theatre-comedy", name: "Theatre & Comedy", icon: "🎭" },
-  { id: "food-drink", name: "Food & Drink", icon: "🍽️" },
-  { id: "art-exhibitions", name: "Art & Exhibitions", icon: "🖼️" },
-  { id: "sports-outdoor", name: "Sports & Outdoor", icon: "⚽" },
-  { id: "workshops-classes", name: "Workshops & Classes", icon: "🛠️" },
-  { id: "outdoor-activities", name: "Outdoor Activities", icon: "🏞️" },
+  { id: "pop-up", name: "Pop-ups" },
+  { id: "festival", name: "Festivals" },
+  { id: "live-music", name: "Live Music" },
+  { id: "theatre-comedy", name: "Theatre & Comedy" },
+  { id: "food-drink", name: "Food & Drink" },
+  { id: "art-exhibitions", name: "Art & Exhibitions" },
+  { id: "sports-outdoor", name: "Sports & Outdoor" },
+  { id: "workshops-classes", name: "Workshops & Classes" },
+  { id: "outdoor-activities", name: "Outdoor Activities" },
 ];
 
 export const todaysEvents = [

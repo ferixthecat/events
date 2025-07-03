@@ -15,7 +15,6 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 					return (
 						<section class="category-column">
 							<h3 class="category-title">
-								<span class="category-icon">{category.icon}</span>
 								{category.name}
 								<span class="category-count">({categoryEvents.length})</span>
 							</h3>
@@ -51,8 +50,8 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 		</div>
 		 
 		<!-- No Events Message -->
-		<section class="no-events-cta" style="margin-top: 3rem; padding: 2rem; background: #f8fafc; border-radius: 8px; text-align: center;">
-			<h3 style="margin-bottom: 1rem; color: #374151;">Not finding what you're looking for?</h3>
+		<section class="no-events-cta" style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%); border-radius: 12px; text-align: center; border: 1px solid #e5e7eb;">
+			<h3 style="margin-bottom: 1rem; color: #111827;">Not finding what you're looking for?</h3>
 			<p style="color: #6b7280; margin-bottom: 1.5rem;">Check out our curated list of things to do in Toronto anytime.</p>
 			<a href="/things-to-do" class="cta-button">Browse Things to Do</a>
 		</section>
@@ -76,7 +75,7 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 		.categories-grid {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 1.5rem;
+			gap: 1.25rem;
 			align-items: start;
 			margin-bottom: 2rem;
 		}
@@ -84,30 +83,26 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 		.category-column {
 			background: #ffffff;
 			border: 1px solid #e5e7eb;
-			border-radius: 8px;
-			padding: 1.5rem;
-			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-			transition: box-shadow 0.2s ease;
+			border-radius: 12px;
+			padding: 1.25rem;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+			transition: all 0.2s ease;
 		}
 		
 		.category-column:hover {
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+			transform: translateY(-2px);
 		}
 		
 		.category-title {
 			display: flex;
 			align-items: center;
-			gap: 0.75rem;
 			font-size: 1.25rem;
 			font-weight: 600;
-			color: #1f2937;
-			margin-bottom: 1.5rem;
-			padding-bottom: 0.75rem;
-			border-bottom: 2px solid #e5e7eb;
-		}
-		
-		.category-icon {
-			font-size: 1.25rem;
+			color: #111827;
+			margin-bottom: 1rem;
+			padding-bottom: 0.5rem;
+			border-bottom: 2px solid #f3f4f6;
 		}
 		
 		.category-count {
@@ -115,12 +110,15 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 			font-size: 0.9rem;
 			font-weight: 500;
 			margin-left: auto;
+			background: #f9fafb;
+			padding: 0.25rem 0.5rem;
+			border-radius: 6px;
 		}
 		
 		.events-list {
 			display: flex;
 			flex-direction: column;
-			gap: 0.75rem;
+			gap: 0.25rem;
 		}
 		
 		.event-item {
@@ -130,21 +128,21 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 		}
 		
 		.event-title {
-			color: #3b82f6;
+			color: #059669;
 			cursor: pointer;
 			font-weight: 500;
 			transition: color 0.15s ease;
 			text-decoration: none;
 			border-bottom: 1px solid transparent;
-			padding: 0.5rem 0;
+			padding: 0.375rem 0;
 			display: block;
 			border-radius: 4px;
 		}
 		
 		.event-title:hover {
-			color: #1e40af;
-			background: #f8fafc;
-			padding-left: 0.5rem;
+			color: #047857;
+			background: #f0fdf4;
+			padding-left: 0.375rem;
 		}
 		
 		.no-events-text {
@@ -208,8 +206,8 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 		}
 		
 		.popup-price {
-			background: #dbeafe;
-			color: #1e40af;
+			background: #fef3c7;
+			color: #d97706;
 			padding: 0.25rem 0.5rem;
 			border-radius: 4px;
 			font-size: 0.8rem;
@@ -247,7 +245,7 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 		
 		.cta-button {
 			display: inline-block;
-			background: #3b82f6;
+			background: #7c3aed;
 			color: white;
 			padding: 0.75rem 1.5rem;
 			border-radius: 6px;
@@ -257,7 +255,7 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 		}
 		
 		.cta-button:hover {
-			background: #2563eb;
+			background: #6d28d9;
 		}
 		
 		/* Responsive breakpoints */
