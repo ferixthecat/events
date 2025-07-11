@@ -1,16 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { categories, todaysEvents, getEventsByCategory } from "../data/events.js";
+import { categories, getWeekendEvents, getWeekendDateRange, getEventsByDateRange } from "../data/events.js";
+
+const weekendEvents = getWeekendEvents();
+const weekendDateRange = getWeekendDateRange();
+function getWeekendEventsByCategory(categoryId: string) {
+	return weekendEvents.filter(event => event.category === categoryId);
+}
 ---
 
 <BaseLayout title="what TO do - Today's Events">
 	<div style="padding: 2rem 1rem;">
 		<div class="events-container">
-			<h2 class="page-title">Today's Events ({todaysEvents.length})</h2>
+			<h2 class="page-title">
+				Weekend Events ({weekendEvents.length})
+				<span class="date-range">{weekendDateRange}</span>
+			</h2>
 			
 			<div class="categories-grid">
 				{categories.map(category => {
-					const categoryEvents = getEventsByCategory(category.id);
+					const categoryEvents = getWeekendEventsByCategory(category.id);
 					
 					return (
 						<section class="category-column">
@@ -29,18 +38,19 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 											<div class="event-popup">
 												<div class="popup-content">
 													<h5 class="popup-title">{event.title}</h5>
+													<div class="popup-date">{new Date(event.date).toLocaleDateString('en-US', {month: 'long', day: 'numeric'})}</div>
 													<div class="popup-meta">
-														<div class="popup-time">🕐 {event.time}</div>
-														<div class="popup-price">💰 {event.price}</div>
+														<div class="popup-time">{event.time}</div>
+														<div class="popup-price">{event.price}</div>
 													</div>
-													<div class="popup-location">📍 {event.location}</div>
+													<div class="popup-location">{event.location}</div>
 													<div class="popup-address">{event.address}</div>
 												</div>
 											</div>
 										</div>
 									))
 								) : (
-									<div class="no-events-text">No events today</div>
+									<div class="no-events-text">No events this weekend</div>
 								)}
 							</div>
 						</section>
@@ -70,6 +80,19 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 			color: #1f2937;
 			margin-bottom: 2.5rem;
 			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		.date-range {
+			font-size: 1rem;
+			font-weight: 500;
+			color: #6b7280;
+			background: #f3f4f6;
+			padding: 0.5rem 1rem;
+			border-radius: 20px;
 		}
 		
 		.categories-grid {
@@ -225,6 +248,14 @@ import { categories, todaysEvents, getEventsByCategory } from "../data/events.js
 			color: #6b7280;
 			font-size: 0.8rem;
 			line-height: 1.4;
+		}
+
+		.popup-date {
+			color: #4b5563;
+			font-size: 0.85rem;
+			font-weight: 500;
+			padding-top: 0.25rem;
+			border-top: 1px solid #e5e7eb;
 		}
 		
 		/* Arrow for popup */
