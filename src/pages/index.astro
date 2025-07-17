@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { categories, getWeekendEvents, getWeekendDateRange, getEventsByDateRange } from "../data/events.js";
+import { categories, getWeekendEvents, getWeekendDateRange, formatEventDate } from "../data/events.js";
 
 const weekendEvents = getWeekendEvents();
 const weekendDateRange = getWeekendDateRange();
@@ -38,13 +38,17 @@ function getWeekendEventsByCategory(categoryId: string) {
 											<div class="event-popup">
 												<div class="popup-content">
 													<h5 class="popup-title">{event.title}</h5>
-													<div class="popup-date">{new Date(event.date).toLocaleDateString('en-US', {month: 'long', day: 'numeric'})}</div>
+													<div class="popup-date">{formatEventDate(event.date)}</div>
 													<div class="popup-meta">
 														<div class="popup-time">{event.time}</div>
 														<div class="popup-price">{event.price}</div>
 													</div>
-													<div class="popup-location">{event.location}</div>
-													<div class="popup-address">{event.address}</div>
+													<div class="popup-description">{event.description}</div>
+													<div class="popup-locationinfo">
+														<div class="popup-location">{event.location}</div>
+														<div class="popup-address">{event.address}</div>
+													</div>
+													
 												</div>
 											</div>
 										</div>
@@ -238,6 +242,13 @@ function getWeekendEventsByCategory(categoryId: string) {
 			white-space: nowrap;
 		}
 		
+		.popup-locationinfo {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+			margin-top: 0.5rem;
+		}
+
 		.popup-location {
 			color: #374151;
 			font-weight: 500;
@@ -256,6 +267,19 @@ function getWeekendEventsByCategory(categoryId: string) {
 			font-weight: 500;
 			padding-bottom: 0.5rem;
 			border-bottom: 1px solid #f3f4f6;
+		}
+
+		.popup-description {
+			color: #4b5563;
+			font-size: 0.85rem;
+			line-height: 1.4;
+			margin-top: 0.25rem;
+			max-height: 60px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
 		}
 		
 		/* Arrow for popup */
