@@ -151,7 +151,6 @@ function getWeekendEventsByCategory(categoryId: string) {
 		.event-item {
 			position: relative;
 			display: block;
-			z-index: 1;
 		}
 		
 		.event-title {
@@ -183,7 +182,7 @@ function getWeekendEventsByCategory(categoryId: string) {
 		/* Popup Styles */
 		.event-popup {
 			position: absolute;
-			top: calc(100% + 8px);
+			bottom: calc(100% + 8px);
 			left: 50%;
 			transform: translateX(-50%);
 			background: white;
@@ -198,7 +197,11 @@ function getWeekendEventsByCategory(categoryId: string) {
 			pointer-events: none;
 			transition: all 0.2s ease;
 		}
-		
+
+		.event-item:hover {
+			z-index: 1001;
+		}
+
 		.event-item:hover .event-popup {
 			opacity: 1;
 			visibility: visible;
