@@ -1,6 +1,16 @@
-import { defineDb } from 'astro:db';
+import { defineDb, defineTable, column } from "astro:db";
 
-// https://astro.build/db/config
+const Event = defineTable({
+  columns: {},
+});
+
+const Category = defineTable({
+  columns: {
+    id: column.text(),
+    name: column.text(),
+  },
+});
+
 export default defineDb({
-  tables: {}
+  tables: { Event, Category },
 });
