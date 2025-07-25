@@ -201,4 +201,28 @@ export const events = [
     price: "Free",
     description: "The hot summer outdoor movie is Saturday July 26.",
   },
+  {
+    id: 18,
+    title: "Koreatown Street Festival",
+    category: "food-drink",
+    date: "2025-07-26",
+    time: "1:00 PM - 9:00 PM",
+    location: "Bloor St W (between Crawford St and Markham St)",
+    address: "Bloor St W (between Crawford St and Markham St), Toronto",
+    price: "Free",
+    description:
+      "The Korea Town Street Festival celebrates Korean culture through food, music, art, and storytelling, with something for everyone to enjoy — from sizzling BBQ and traditional drumming to interactive workshops.",
+  },
+  {
+    id: 19,
+    title: "Summer Live Music Festival",
+    category: "live-music",
+    date: "2025-07-26",
+    time: "4:00 PM - 10:00 PM",
+    location: "Trillium Park at Ontario Place",
+    address: "955 Lake Shore Blvd W, Toronto",
+    price: "Free",
+    description:
+      "Experience the sounds of summer at the Summer Live Music Festival 2025 - a free outdoor event at Trillium Park featuring award-winning jazz bands, world music artists, and top a cappella groups.",
+  },
 ];
